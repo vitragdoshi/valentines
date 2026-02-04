@@ -30,7 +30,6 @@
       padding: 16px;
     }
 
-    /* FULL-SCREEN CONFETTI CANVAS */
     #confettiCanvas {
       position: fixed;
       inset: 0;
@@ -171,14 +170,13 @@
             fill="#ff7aa2"/>
     </svg>
 
-    <h1>Nishita, will you be my valentine?</h1>
+    <h1><span id="name">Nishita</span>, will you be my valentine?</h1>
 
     <section class="button-zone" id="zone">
       <button id="yesBtn">Yes</button>
       <button id="noBtn">No</button>
     </section>
 
-    <!-- HINT -->
     <div class="hint" id="hint">“No” seems a bit shy 😈</div>
 
     <section class="result" id="result">
@@ -192,6 +190,16 @@
   </main>
 
   <script>
+    /* ---------- NAME FROM URL ---------- */
+    function getNameFromUrl(defaultName = "Nishita") {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get("name");
+      return name ? decodeURIComponent(name).trim() : defaultName;
+    }
+
+    document.getElementById("name").textContent = getNameFromUrl();
+
+    /* ---------- ELEMENTS ---------- */
     const zone = document.getElementById("zone");
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
@@ -292,7 +300,7 @@
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
       zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
+      hint.style.display = "none";
       result.style.display = "block";
       resizeConfettiCanvas();
       fullScreenConfetti();
@@ -300,5 +308,3 @@
   </script>
 </body>
 </html>
-
-
